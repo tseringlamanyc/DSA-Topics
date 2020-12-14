@@ -3,5 +3,15 @@
     <pages>
         <page name='Heap'/>
         <page name='Binary Search '/>
+        <page name='Binary tree'/>
+        <page name='Binary search tree'/>
+        <page name='Bubble sort'/>
+        <page name='Hashtable '/>
+        <page name='Insertion sort '/>
+        <page name='Linked list '/>
+        <page name='Merge sort '/>
+        <page name='Queue'/>
+        <page name='Recursion '/>
+        <page name='Stacks'/>
     </pages>
 </playground>
