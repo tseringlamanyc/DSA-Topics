@@ -19,6 +19,12 @@ struct Heap {
     // data structure for our Heap nodes is an array
     private var nodes = [2, 8, 21, 10, 16, 30, 36]
     
+    private var orderingCriteria: (Int, Int) -> Bool
+    
+    public init(_ sort: @escaping (Int, Int) -> Bool) {
+        self.orderingCriteria = sort // < (minheap) or > (max heap) 
+    }
+    
     // peek
     public func peek() -> Int? {
         guard !nodes.isEmpty else {return nil}
@@ -55,6 +61,30 @@ struct Heap {
         guard rightChildIndex(index) < nodes.count else {return nil}
         return nodes[rightChildIndex(index)]
     }
+    
+    // insert
+    public mutating func insert(_ item: Int) {
+        // append new element to the end of the array
+        nodes.append(item) // nodes is changing so mutating is needed
+        shiftUp(nodes.count - 1)
+    }
+    
+    // shift up in order to heapify and satisfy the heap property
+    public mutating func shiftUp(_ index: Int) {
+        let newChild = nodes[index]
+        var childIndex = index // starts off as the last index
+        var parentIndex = self.parentIndex(childIndex)
+        
+        while childIndex > 0 && orderingCriteria(newChild, nodes[parentIndex]) {
+            // keep swapping
+            nodes[childIndex] = nodes[parentIndex]  // swap child and parent value
+            childIndex = parentIndex // traverse
+            parentIndex = self.parentIndex(childIndex) // find new parent index
+        }
+        
+        // at the end of comparison we will insert the newchild
+        nodes[childIndex] = newChild
+    }
 }
 
 /*
@@ -67,10 +97,12 @@ struct Heap {
  level order: 2,8,21,10,16,30,36
 */
 
-let minHeap = Heap()
+var minHeap = Heap(<)
 
 minHeap.parentIndex(5) // 2
 minHeap.leftChildIndex(2) // 5
 minHeap.parentValue(minHeap.parentIndex(10))
 minHeap.leftChildValue(minHeap.leftChildIndex(36))
 minHeap.rightChildValue(minHeap.rightChildIndex(36))
+minHeap.insert(-6)
+minHeap.peek()
