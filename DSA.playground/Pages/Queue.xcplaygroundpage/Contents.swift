@@ -1,5 +1,14 @@
 import UIKit
 
+// Queues: is a abstract data type that is a FIFO structure (meaning: first object added is the first object to be removed from the data structure)
+
+// methods of a Queue:
+
+// enqueue: add item to the back of the queue
+// dequeue: remove item from the front of the queue
+// properties: count, isEmpty, peek
+
+
 struct Queue<T:Equatable>: Equatable {  // copy value type so use mutating
     private var elements = [T]()
     
@@ -29,19 +38,22 @@ struct Queue<T:Equatable>: Equatable {  // copy value type so use mutating
 
 struct Stack<T: Equatable>: Equatable  {
     private var typeArr = [T]()
-
+    
     public var peek: T? {
         return typeArr.last
     }
+    
     public mutating func push(item: T) {
         typeArr.append(item)
     }
+    
     public mutating func pop() -> T? {
         guard !typeArr.isEmpty else {
             return nil
         }
         return typeArr.removeLast()
     }
+    
     var isEmpty: Bool {
         return typeArr.count == 0
     }
@@ -53,6 +65,33 @@ queue2.enqueue(item: 2)
 queue2.enqueue(item: -1)
 
 print(queue2)
+
+
+// range
+func findRange(q: Queue<Int>) -> Int? {
+    
+    var qCopy = q
+    
+    guard var smallest = qCopy.peek else {return nil}
+    guard var largest = qCopy.peek else {return nil}
+    
+    while let value = qCopy.deque() {
+        if value < smallest {
+            smallest = value
+        }
+    }
+    
+    while let value2 = qCopy.deque() {
+        if value2 > largest {
+            largest = value2
+        }
+    }
+    
+    return largest - smallest
+    
+}
+
+findRange(q: queue2)
 
 //1. Find the smallest element in a queue
 func smallestElement<T: Comparable>(in q: Queue<T>) -> T? {
@@ -96,6 +135,7 @@ func isSorted<T: Comparable>(q: Queue<T>) -> Bool {
     guard var currentElement = qCopy.peek else {return false}
     
     while let value = qCopy.deque() {
+        print(value, currentElement)
         if value < currentElement {
             return false
         }
@@ -122,6 +162,12 @@ isSorted(q: queue3)
 /*
  Sample Input:   (Back) 9 - 16 - 2 - 31 (Front)
  Sample Output:  (Back) 31 - 2 - 16 - 9 (Front)
+ 
+F [31,2,16,9] B  => original
+ 
+ [31,2,16,9] - stack (removeLast and append to the new queue)
+ 
+F [9,16,2,31] B => reversed
  */
 
 func reversed<T>(q: Queue<T>) -> Queue<T> {
@@ -147,15 +193,16 @@ print("Original:\(queue3), Reversed:\(reversed(q: queue3))")
 func areEqual<T: Equatable>(qOne: Queue<T>, qTwo: Queue<T>) -> Bool {
     var q1 = qOne
     var q2 = qTwo
-    
+
     while !q1.isEmpty && !q2.isEmpty {
         guard let value1 = q1.deque(), let value2 = q2.deque() else {return false}
         if value1 != value2 {
             return false
         }
     }
+    
     return true
 }
 
-areEqual(qOne: queue3, qTwo: queue4)
+print(areEqual(qOne: queue3, qTwo: queue4))
 

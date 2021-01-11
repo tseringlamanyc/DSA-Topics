@@ -1,14 +1,14 @@
 import Foundation
 
 /*
-         2             [0]
-       /    \
-      8      21        [1,2]
-     / \    /  \
-    10  16  30   36    [3,4,5,6]
+     2             [0]
+   /    \
+  8      21        [1,2]
+ / \    /  \
+10  16  30   36    [3,4,5,6]
  
  level order: 2,8,21,10,16,30,36
-*/
+ */
 
 // Heap - is a tree data structure that is mainly used to create a min or max heap. Heap is traditiionally implemented using an array as opposed to a Binary tree that uses pointers to left and right children. The heap property is statisfied when for example in a min Heap the root is smaller than any of its children, in a max heap the root is greater than any child notes.
 
@@ -87,64 +87,63 @@ struct Heap {
     }
     
     // removes from top node
-       mutating func remove() -> Int? { // Min or Max
-         // check if heap is empty
-         guard !nodes.isEmpty else {return nil}
-
-         // if heap only has one child remove and return the node
-         if nodes.count == 1 {
-           return nodes.removeLast()
-         }
-
-         // if multiple nodes exist
-         let removedValue = nodes[0] // first or top value
-
-         nodes[0] = nodes.removeLast() // remove the last value and insert into first position
-
-         // Heapify
-         shiftDown(from: 0, to: nodes.count)
-
-         return removedValue
-
-       }
-
-       mutating func shiftDown(from index: Int, to endIndex: Int) {
-         let leftChildIndex = self.leftChildIndex(index)
-         let rightChildIndex = self.rightChildIndex(index)
-
-         var currentIndex = index // starts from 0 or the top
-         
-         if leftChildIndex < endIndex && nodes[leftChildIndex] < nodes[currentIndex] {
-             currentIndex = leftChildIndex
-         }
-
-         if rightChildIndex < endIndex && nodes[rightChildIndex] < nodes[currentIndex] {
+    mutating func remove() -> Int? { // Min or Max
+        // check if heap is empty
+        guard !nodes.isEmpty else {return nil}
+        
+        // if heap only has one child remove and return the node
+        if nodes.count == 1 {
+            return nodes.removeLast()
+        }
+        
+        // if multiple nodes exist
+        let removedValue = nodes[0] // first or top value
+        
+        nodes[0] = nodes.removeLast() // remove the last value and insert into first position
+        
+        // Heapify
+        shiftDown(from: 0, to: nodes.count)
+        
+        return removedValue
+        
+    }
+    
+    mutating func shiftDown(from index: Int, to endIndex: Int) {
+        let leftChildIndex = self.leftChildIndex(index)
+        let rightChildIndex = self.rightChildIndex(index)
+        
+        var currentIndex = index // starts from 0 or the top
+        
+        if leftChildIndex < endIndex && nodes[leftChildIndex] < nodes[currentIndex] {
+            currentIndex = leftChildIndex
+        }
+        
+        if rightChildIndex < endIndex && nodes[rightChildIndex] < nodes[currentIndex] {
             currentIndex = rightChildIndex
-         }
-
-         // if they are equal then no swaps
-         if currentIndex == index {
-             return
-         }
-
-         // otherwise we need to swap indices
-         nodes.swapAt(currentIndex, index) // constant run time
-
-         // keep calling recursively
-         shiftDown(from: currentIndex, to: endIndex)
-       }
-
+        }
+        
+        // if they are equal then no swaps
+        if currentIndex == index {
+            return
+        }
+        
+        // otherwise we need to swap indices
+        nodes.swapAt(currentIndex, index) // constant run time
+        
+        // keep calling recursively
+        shiftDown(from: currentIndex, to: endIndex)
+    }
 }
 
 /*
-         2             [0]
-       /    \
-      8      21        [1,2]
-     / \    /  \
-    10  16  30   36    [3,4,5,6]
+    2             [0]
+  /    \
+  8      21        [1,2]
+ / \    /  \
+10  16  30   36    [3,4,5,6]
  
  level order: 2,8,21,10,16,30,36
-*/
+ */
 
 var minHeap = Heap(<)
 
