@@ -85,6 +85,55 @@ struct Heap {
         // at the end of comparison we will insert the newchild
         nodes[childIndex] = newChild
     }
+    
+    // removes from top node
+       mutating func remove() -> Int? { // Min or Max
+         // check if heap is empty
+         guard !nodes.isEmpty else {return nil}
+
+         // if heap only has one child remove and return the node
+         if nodes.count == 1 {
+           return nodes.removeLast()
+         }
+
+         // if multiple nodes exist
+         let removedValue = nodes[0] // first or top value
+
+         nodes[0] = nodes.removeLast() // remove the last value and insert into first position
+
+         // Heapify
+         shiftDown(from: 0, to: nodes.count)
+
+         return removedValue
+
+       }
+
+       mutating func shiftDown(from index: Int, to endIndex: Int) {
+         let leftChildIndex = self.leftChildIndex(index)
+         let rightChildIndex = self.rightChildIndex(index)
+
+         var currentIndex = index // starts from 0 or the top
+         
+         if leftChildIndex < endIndex && nodes[leftChildIndex] < nodes[currentIndex] {
+             currentIndex = leftChildIndex
+         }
+
+         if rightChildIndex < endIndex && nodes[rightChildIndex] < nodes[currentIndex] {
+            currentIndex = rightChildIndex
+         }
+
+         // if they are equal then no swaps
+         if currentIndex == index {
+             return
+         }
+
+         // otherwise we need to swap indices
+         nodes.swapAt(currentIndex, index) // constant run time
+
+         // keep calling recursively
+         shiftDown(from: currentIndex, to: endIndex)
+       }
+
 }
 
 /*
@@ -106,3 +155,5 @@ minHeap.leftChildValue(minHeap.leftChildIndex(36))
 minHeap.rightChildValue(minHeap.rightChildIndex(36))
 minHeap.insert(-6)
 minHeap.peek()
+(minHeap.remove() ?? -100000)
+(minHeap.peek() ?? -10000)

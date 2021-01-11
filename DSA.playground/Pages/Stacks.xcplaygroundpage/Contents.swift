@@ -1,5 +1,7 @@
 import Foundation
 
+//MARK:- LIFO 
+
 struct Stack<T: Equatable>: Equatable  {
     private var typeArr = [T]()
     
@@ -17,6 +19,10 @@ struct Stack<T: Equatable>: Equatable  {
     }
     var isEmpty: Bool {
         return typeArr.isEmpty
+    }
+    
+    var contains: Bool {
+        return typeArr.contains(T.self as! T)
     }
 }
 
@@ -147,10 +153,42 @@ func balancedParenthesis(phrase: String) -> Bool {
                 return false
             } else {
                 stack.pop()
+            }
         }
     }
-}
     return stack.isEmpty
 }
 
 balancedParenthesis(phrase: "((hello)")
+
+func isPalindrome(sentence: String) -> Bool {
+    
+    var stack1 = Stack<String>()
+    var stack2 = Stack<String>()
+    
+    for char in sentence.lowercased() {
+        if char.isLetter {
+            stack1.push(item: String(char))
+        }
+    }
+    
+    stack2 = reverse(stack: stack1)
+    
+    if equalStacks(stackOne: stack1, stackTwo: stack2) {
+        return true
+    } else {
+        return false
+    }
+}
+
+(isPalindrome(sentence: "A man, a plan, a canal: Panama"))
+
+
+var array1 = [1,2,-3,10]
+var last = array1.last
+var last2 = array1.last
+print(array1)
+
+
+var num = 9
+var numString = String(num)
