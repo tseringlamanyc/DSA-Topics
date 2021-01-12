@@ -56,6 +56,7 @@ class Linkedlist<T: Equatable> {
     public var isEmpty: Bool {
         return head == nil
     }
+    
     // append - adds node to the end of the list
     public func append(value: T) {
         let newNode = Node(value: value)
@@ -110,7 +111,7 @@ class Linkedlist<T: Equatable> {
         
         while currentNode != nil {
             totalCount += 1
-            print(currentNode?.value as Any)
+
             currentNode = currentNode?.nextValue
         }
         return totalCount
@@ -174,7 +175,7 @@ class Linkedlist<T: Equatable> {
         var currentNode = head
         
         while currentNode != nil {
-
+            
             let nextNode = currentNode?.nextValue // A -> B (B is nextValue)
             
             currentNode?.nextValue = previousNode  // nil <- A , initially
@@ -192,15 +193,60 @@ class Linkedlist<T: Equatable> {
     }
     
     var middle: Node<T>? {
-        var slow = head
-        var fast = head
+//        var slow = head
+//        var fast = head
+//
+//        while fast != nil && fast?.nextValue != nil {
+//            slow = slow?.nextValue
+//            fast = fast?.nextValue?.nextValue
+//        }
+//
+//        return slow
         
-        while fast != nil && fast?.nextValue != nil {
-            slow = slow?.nextValue
-            fast = fast?.nextValue?.nextValue
+        var current = head
+        
+        guard head != nil else {return nil}
+        
+        var arrayNode = [Node<T>]()
+        
+        while current != nil {
+            arrayNode.append(current!)
+            current = current?.nextValue
         }
         
-        return slow
+        let mid = Int(arrayNode.count / 2)
+        
+        return arrayNode[mid]
+        
+    }
+    
+    func removeTargets(target: T) -> Node<T>? {
+        var currentHead = head
+        
+        if currentHead == nil {return nil}
+        
+        if currentHead?.nextValue == nil && currentHead?.value == target {
+            return nil
+        }
+        
+        if currentHead?.nextValue == nil && currentHead?.value != target {
+            return currentHead
+        }
+        
+        while currentHead != nil {
+            if currentHead?.nextValue?.value == target {
+                currentHead?.nextValue = currentHead?.nextValue?.nextValue
+            } else {
+                currentHead = currentHead?.nextValue
+            }
+        }
+        
+        if currentHead?.value == target {
+            return currentHead?.nextValue
+        }
+        
+        return currentHead
+        
     }
     
 }
@@ -218,6 +264,16 @@ let list = Linkedlist<String>()
 list.append(value: "A")
 list.append(value: "B")
 list.append(value: "C")
+list.append(value: "3")
+list.append(value: "1")
+list.append(value: "3")
+list.append(value: "1")
+list.append(value: "3")
+list.append(value: "1")
+
+list.removeTargets(target: "1")
+
+list
 
 let list2 = Linkedlist<String>()
 list2.append(value: "A")
@@ -241,4 +297,8 @@ list.equals(otherList: list2)
 list.reversed()
 
 list.removeLast()
-print(list)
+print("This is \(list)")
+
+
+
+
