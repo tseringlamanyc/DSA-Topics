@@ -17,12 +17,30 @@ import Foundation
 struct Heap {
     
     // data structure for our Heap nodes is an array
-    private var nodes = [2, 8, 21, 10, 16, 30, 36]
+    private var nodes = [Int]()
+    
+    public var count: Int {
+        return nodes.count
+    }
     
     private var orderingCriteria: (Int, Int) -> Bool
     
     public init(_ sort: @escaping (Int, Int) -> Bool) {
         self.orderingCriteria = sort // < (minheap) or > (max heap) 
+    }
+    
+    public init(_ array: [Int], _ sort: @escaping (Int, Int) ->Bool) {
+       self.orderingCriteria = sort
+       convert(array: array)
+    }
+   
+    // convert array to heap
+    private mutating func convert(array: [Int]) {
+      nodes = array
+
+      for i in stride(from: (nodes.count / 2) - 1, through: 0, by: -1) {
+         shiftDown(from: i, to: nodes.count)
+      }
     }
     
     // peek

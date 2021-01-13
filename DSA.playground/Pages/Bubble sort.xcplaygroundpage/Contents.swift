@@ -43,13 +43,28 @@ func anotherBubbleSort<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> 
     return tempArray
 }
 
+anotherBubbleSort(arr: [1,2,3,4,5], by: >)
+
 
 // Question Two
 // Sort an array of Ints without changing the position of any negative numbers
 // https://www.geeksforgeeks.org/sort-an-array-without-changing-position-of-negative-numbers/
-func bubbleSortWithoutMovingNegatives<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
-    return arr
+func bubbleSortWithoutMovingNegatives(arr: [Int], by isSorted: (Int, Int) -> Bool) -> [Int] {
+    
+    var tempArr = arr
+    
+    for i in 0..<tempArr.count {
+        for j in 1..<tempArr.count - i {
+                if isSorted(tempArr[j], tempArr[j - 1]) {
+                 
+            }
+        }
+    }
+    
+    return tempArr
 }
+
+bubbleSortWithoutMovingNegatives(arr: [2, -6, -3, 8, 4, 1], by: <)
 
 // Question Three
 // Implement Cocktail sort
@@ -63,3 +78,41 @@ func cocktailSort<T: Comparable>(arr: [T], by isSorted: (T, T) -> Bool) -> [T] {
 //func bubbleSort<T: Comparable>(list: LinkedList<T>, by isSorted: (T, T) -> Bool) -> LinkedList<T> {
 //    return list
 //}
+
+
+func bubble2(arr: inout [Int]) {
+    for _ in 0..<arr.count {
+        for j in 1..<arr.count {
+            if arr[j] < arr[j - 1] {
+                let temp = arr[j]
+                arr[j] = arr[j - 1]
+                arr[j - 1] = temp
+            }
+        }
+    }
+}
+
+var listu = [10, 2, -8, 4]
+bubble2(arr: &listu)
+
+2 > 2
+
+func optimizedBubble(arr: inout [Int]) {
+    var swaps = false
+    
+    for i in 0..<arr.count {
+        for j in 1..<arr.count - i {
+            print(i, j)
+            if arr[j] < arr[j - 1] {
+                arr.swapAt(j, j - 1)
+                swaps = true
+            }
+        }
+        if !swaps {
+            break // arr already sorted at this point
+        }
+    }
+}
+
+var listuu = [10, 2, -8, 4, -1000, 0]
+optimizedBubble(arr: &listuu)
