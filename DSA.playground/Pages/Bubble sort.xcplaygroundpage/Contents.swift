@@ -56,7 +56,7 @@ func bubbleSortWithoutMovingNegatives(arr: [Int], by isSorted: (Int, Int) -> Boo
     for i in 0..<tempArr.count {
         for j in 1..<tempArr.count - i {
                 if isSorted(tempArr[j], tempArr[j - 1]) {
-                 
+                 // TO DO 
             }
         }
     }

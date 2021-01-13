@@ -11,8 +11,10 @@ import UIKit
 
 func insertionSort(arr: inout [Int]) {
     guard arr.count >= 2 else {return}
+    
     for current in 1..<arr.count {
         for j in (1...current).reversed() {
+            print(current, j)
             if arr[j] < arr[j - 1] {
                 // swap
                 arr.swapAt(j, j - 1)
@@ -26,3 +28,19 @@ func insertionSort(arr: inout [Int]) {
 var list = [4, 5, 9, -2]
 
 insertionSort(arr: &list)
+
+
+func insertionSortPrime(arr: inout [Int]) {
+    
+    for current in 1..<arr.count {
+        var hole = current
+        
+        while hole > 0 && arr[hole] < arr[hole - 1] {
+            arr.swapAt(hole, hole - 1)
+            hole -= 1
+        }
+    }
+    
+}
+
+insertionSortPrime(arr: &list)
