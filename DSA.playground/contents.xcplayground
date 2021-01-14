@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='ios' buildActiveScheme='true'>
     <pages>
+        <page name='Hashtable '/>
         <page name='Heap'/>
         <page name='Binary Search '/>
         <page name='Binary tree'/>
         <page name='Binary search tree'/>
         <page name='Bubble sort'/>
-        <page name='Hashtable '/>
         <page name='Insertion sort '/>
         <page name='Linked list '/>
         <page name='Merge sort '/>
         <page name='Queue'/>
         <page name='Recursion '/>
         <page name='Stacks'/>
+        <page name='Quick Sort'/>
     </pages>
 </playground>
