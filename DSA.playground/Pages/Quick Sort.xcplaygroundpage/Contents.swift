@@ -51,3 +51,15 @@ func quickSortLomuto(_ arr: inout [Int], low: Int, high: Int) {
 
 var list = [80, 10, -9, 0, -11, 13]
 quickSortLomuto(&list, low: 0, high: list.count - 1)
+
+
+// LEETCODE
+
+func sortArray(_ nums: [Int]) -> [Int] {
+    
+    var sortedArr = nums
+    
+    quickSortLomuto(&sortedArr, low: 0, high: sortedArr.count - 1)
+    
+    return sortedArr
+}

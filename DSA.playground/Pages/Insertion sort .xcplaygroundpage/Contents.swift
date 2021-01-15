@@ -10,6 +10,7 @@ import UIKit
  */
 
 func insertionSort(arr: inout [Int]) {
+    
     guard arr.count >= 2 else {return}
     
     for current in 1..<arr.count {
