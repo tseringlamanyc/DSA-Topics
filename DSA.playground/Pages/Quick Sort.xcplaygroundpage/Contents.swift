@@ -12,6 +12,15 @@ import Foundation
 // returns new index which we will use as the pivot to partition the array into a left and right
 func lomotoPartition(_ arr: inout [Int], low: Int, high: Int) -> Int {
     
+    /*
+      Steps of Lomuto's Partitioning
+      1. Use the last element as the pivot
+      2. Iterate the array with i and j variables
+      3. If element at j is less than the pivot then swap i and j, increment i
+      4. Swap i and the high indices
+      5. Return i (new pivot to divide the array using recursion)
+     */
+    
     let pivot = arr[high]
     
     var i = low
@@ -34,6 +43,16 @@ func lomotoPartition(_ arr: inout [Int], low: Int, high: Int) -> Int {
 
 // Second part is using recursion to break up array into subarrays while sorting in place
 func quickSortLomuto(_ arr: inout [Int], low: Int, high: Int) {
+    
+    /*
+      Steps for Quick sort using Lomuto's partitioning
+      
+      1. Calculate the new pivot
+      2. left array recursive call will be low, pivot - 1
+      3. right array recursive call will be pivot + 1, high
+     */
+    
+    
     if low < high {  // check to see if the arr has multiple elements
         // get a new pivot
        let pivot = lomotoPartition(&arr, low: low, high: high)
