@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='ios'>
     <pages>
+        <page name='Binary tree'/>
         <page name='Hashtable '/>
         <page name='Heap'/>
         <page name='Binary Search '/>
-        <page name='Binary tree'/>
         <page name='Binary search tree'/>
         <page name='Bubble sort'/>
         <page name='Insertion sort '/>

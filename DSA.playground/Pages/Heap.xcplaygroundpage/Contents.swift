@@ -26,7 +26,7 @@ struct Heap {
     private var orderingCriteria: (Int, Int) -> Bool
     
     public init(_ sort: @escaping (Int, Int) -> Bool) {
-        self.orderingCriteria = sort // < (minheap) or > (max heap) 
+        self.orderingCriteria = sort // < (minheap) or > (max heap)
     }
     
     public init(_ array: [Int], _ sort: @escaping (Int, Int) ->Bool) {
@@ -90,7 +90,7 @@ struct Heap {
     // shift up in order to heapify and satisfy the heap property
     public mutating func shiftUp(_ index: Int) {
         let newChild = nodes[index]
-        var childIndex = index // starts off as the last index
+        var childIndex = index // starts off as the LAST index
         var parentIndex = self.parentIndex(childIndex)
         
         while childIndex > 0 && orderingCriteria(newChild, nodes[parentIndex]) {
@@ -207,7 +207,9 @@ class KthLargest {
     }
 }
 
-let largest = KthLargest(3, [4,5,8,2])
-largest.add(4)
-largest.add(5)
-largest.add(8)
+let largest = KthLargest(2, [0])
+largest.add(-1)
+largest.add(1)
+largest.add(-2)
+largest.add(-4)
+largest.add(3)

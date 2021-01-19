@@ -18,7 +18,7 @@ class BinaryTreeNode<T> {
     var lChild: BinaryTreeNode?
     var rChild: BinaryTreeNode?
     
-    init(value: T) {
+    init(_ value: T) {
         self.value = value
     }
 }
@@ -73,15 +73,36 @@ extension BinaryTreeNode {
             }
         }
     }
+    
+    /*
+     func breadthFirstTraversal<T>(_ treeNode: BinaryTreeNode<T>?) {
+       var queue = Queue<BinaryTreeNode<T>>()
+       guard let treeNode = treeNode else {
+         return
+       }
+       queue.enqueue(treeNode)
+       print(treeNode.value)
+       while let node = queue.dequeue() {
+         if let left = node.left {
+           print(left.value)
+           queue.enqueue(left)
+         }
+         if let right = node.right {
+           print(right.value)
+           queue.enqueue(right)
+         }
+       }
+     }
+     */
 }
 
-let rootNode1 = BinaryTreeNode<Int>(value: 1)
-let rootNode2 = BinaryTreeNode<Int>(value: 2)
-let rootNode3 = BinaryTreeNode<Int>(value: 3)
-let rootNode4 = BinaryTreeNode<Int>(value: 4)
-let rootNode5 = BinaryTreeNode<Int>(value: 5)
-let rootNode6 = BinaryTreeNode<Int>(value: 6)
-let rootNode7 = BinaryTreeNode<Int>(value: 7)
+let rootNode1 = BinaryTreeNode<Int>(1)
+let rootNode2 = BinaryTreeNode<Int>(2)
+let rootNode3 = BinaryTreeNode<Int>(3)
+let rootNode4 = BinaryTreeNode<Int>(4)
+let rootNode5 = BinaryTreeNode<Int>(5)
+let rootNode6 = BinaryTreeNode<Int>(6)
+let rootNode7 = BinaryTreeNode<Int>(7)
 
 rootNode1.lChild = rootNode2
 rootNode1.rChild = rootNode3
@@ -151,3 +172,58 @@ print("Post order")
 rootNode1.postOrder { (node) in
     print(node.value, terminator: " ")
 }
+
+
+func diameter<T>(_ root: BinaryTreeNode<T>?) -> Int {
+  guard let root = root else { return 0 }
+  
+  let leftHeight = getHeight(root.lChild)
+  let rightHeight = getHeight(root.rChild)
+  
+  let leftDiameter = diameter(root.lChild)
+  let rightDiameter = diameter(root.rChild)
+    
+  return max(1 + leftHeight + rightHeight, max(leftDiameter, rightDiameter))
+}
+
+func getHeight<T>(_ root: BinaryTreeNode<T>?) -> Int {
+    guard let root = root else {return 0}
+    
+    let leftSide = 1 + getHeight(root.lChild)
+    let rightSide = 1 + getHeight(root.rChild)
+    
+    return max(leftSide, rightSide)
+}
+
+getHeight(rootNode1)
+
+let grassRoot = BinaryTreeNode(2)
+let twelveNode = BinaryTreeNode(12)
+let eighteenNode = BinaryTreeNode(18)
+let seventeenNode = BinaryTreeNode(17)
+let thirtysixNode = BinaryTreeNode(36)
+let fiveNode = BinaryTreeNode(5)
+let nineNode = BinaryTreeNode(9)
+let twentyThreeNode = BinaryTreeNode(23)
+let sixteenNode = BinaryTreeNode(6)
+let oneNode = BinaryTreeNode(1)
+let tenNode = BinaryTreeNode(10)
+let fourteenNode = BinaryTreeNode(14)
+let threeNode = BinaryTreeNode(3)
+
+grassRoot.lChild = twelveNode
+grassRoot.rChild = eighteenNode
+twelveNode.lChild = seventeenNode
+twelveNode.rChild = thirtysixNode
+seventeenNode.lChild = fiveNode
+seventeenNode.rChild = nineNode
+nineNode.lChild = sixteenNode
+sixteenNode.rChild = fourteenNode
+thirtysixNode.rChild = twentyThreeNode
+twentyThreeNode.lChild = oneNode
+twentyThreeNode.rChild = tenNode
+tenNode.lChild = threeNode
+
+getHeight(grassRoot)
+
+
