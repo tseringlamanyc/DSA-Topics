@@ -163,14 +163,51 @@ struct Heap {
  level order: 2,8,21,10,16,30,36
  */
 
-var minHeap = Heap(<)
+//var minHeap = Heap(<)
+//
+//5 > 5
+//
+//minHeap.parentIndex(5) // 2
+//minHeap.leftChildIndex(2) // 5
+//minHeap.parentValue(minHeap.parentIndex(10))
+//minHeap.leftChildValue(minHeap.leftChildIndex(36))
+//minHeap.rightChildValue(minHeap.rightChildIndex(36))
+//minHeap.insert(-6)
+//minHeap.peek()
+//(minHeap.remove() ?? -100000)
+//(minHeap.peek() ?? -10000)
 
-minHeap.parentIndex(5) // 2
-minHeap.leftChildIndex(2) // 5
-minHeap.parentValue(minHeap.parentIndex(10))
-minHeap.leftChildValue(minHeap.leftChildIndex(36))
-minHeap.rightChildValue(minHeap.rightChildIndex(36))
-minHeap.insert(-6)
-minHeap.peek()
-(minHeap.remove() ?? -100000)
-(minHeap.peek() ?? -10000)
+//MARK:- LEETCODE (Kth largest element)
+class KthLargest {
+    
+    private var priorityQueue = Heap(<)
+    private var k: Int
+    private var nums: [Int] = []
+
+    init(_ k: Int, _ nums: [Int]) {
+        self.k = k
+        for num in nums {
+            add(num)
+        }
+    }
+    
+    func add(_ val: Int) -> Int {
+        // keep adding if nums count is less than k
+        if priorityQueue.count < k {
+            priorityQueue.insert(val)
+        } else {
+            // compare val and peek
+            if val > priorityQueue.peek()! {
+                priorityQueue.remove()
+                priorityQueue.insert(val)
+            }
+        }
+            
+        return priorityQueue.peek()!
+    }
+}
+
+let largest = KthLargest(3, [4,5,8,2])
+largest.add(4)
+largest.add(5)
+largest.add(8)
