@@ -189,10 +189,10 @@ func diameter<T>(_ root: BinaryTreeNode<T>?) -> Int {
 func getHeight<T>(_ root: BinaryTreeNode<T>?) -> Int {
     guard let root = root else {return 0}
     
-    let leftSide = 1 + getHeight(root.lChild)
-    let rightSide = 1 + getHeight(root.rChild)
-    
-    return max(leftSide, rightSide)
+    let leftSide = getHeight(root.lChild)
+    let rightSide = getHeight(root.rChild)
+
+    return 1 + max(leftSide, rightSide)
 }
 
 getHeight(rootNode1)

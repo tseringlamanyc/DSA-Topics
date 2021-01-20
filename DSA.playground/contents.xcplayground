@@ -4,8 +4,8 @@
         <page name='Binary tree'/>
         <page name='Hashtable '/>
         <page name='Heap'/>
-        <page name='Binary Search '/>
-        <page name='Binary search tree'/>
+        <page name='BST'/>
+        <page name='Binary Search'/>
         <page name='Bubble sort'/>
         <page name='Insertion sort '/>
         <page name='Linked list '/>
