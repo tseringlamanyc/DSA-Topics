@@ -184,12 +184,23 @@ func deleteNode(_ root: TreeNode?, _ value: Int) -> TreeNode? {
     return rootCopy
 }
 
+var ar1 = [1,1]
+var ar2 = [4,1,0]
+
+if ar1.sorted() == ar1 {
+    print("yes")
+} else {
+    print("no")
+}
+
+ar1.contains(2)
+
+
 print()
 rootNode2.inorder()
 deleteNode(rootNode2, 5)
 print()
 print(rootNode2.inorder())
-
 
 func convertToBST(_ arr: [Int], _ low: Int, _ high: Int, _ root: TreeNode?) -> TreeNode? {
   // 1. - base case when we have one node
@@ -255,5 +266,5 @@ insert(rootNodeUB, 5)
 
 let balancedUB = unbalancetoBST(rootNodeUB)
 
-print("Height of unbalanced BST is \(height(rootNodeUB))") // 7
-print("Height of balanced BST is \(height(balancedUB))")
+print("Height of unbalanced BST is \(height(rootNodeUB?.right))") // 7
+print("Height of balanced BST is now \(height(balancedUB))")
