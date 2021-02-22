@@ -130,6 +130,17 @@ class Linkedlist<T: Equatable> {
         return currentNode
     }
     
+    func addBeforeHead(value: T) -> Node<T>? {
+        let newNode = Node(value: value)
+        
+        if head == nil {
+            return newNode
+        }
+        
+        newNode.nextValue = head
+        return newNode
+    }
+    
     func contains(element targetKey: T) -> Bool {
         var currentNode = head
         

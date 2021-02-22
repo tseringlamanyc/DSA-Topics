@@ -3,7 +3,7 @@ import Foundation
 // Quick Sort implementation using Lomuto's Partitioning algorithm
 // Quick Sort uses a pivot in our example we use the last element (Lomuto's Partitioning) as the pivot
 // Using this pivot we split the array to the left of the pivot and to the right of the pivot
-// example 10, -9, 0, -11, (pivot is 13) , 80
+// example [80, 10, -9, 0, -11, 13] (pivot is 13) 
 // Quick Sort uses divide and conquer approach to solve the sorting algorithm, divide and conquer is spliting the problem in half on every interation (or recursive call)
 // runtime: O(n log n)
 

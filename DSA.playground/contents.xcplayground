@@ -14,7 +14,7 @@
         <page name='Recursion '/>
         <page name='Stacks'/>
         <page name='Quick Sort'/>
-        <page name='Graphs'/>
         <page name='Trie'/>
+        <page name='Graph'/>
     </pages>
 </playground>

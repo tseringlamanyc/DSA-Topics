@@ -9,7 +9,7 @@ import UIKit
  
  Find the middle index of the array.
  Divide the array in a left and right side using the middle index. O(log n) runtime.
- The base case for stopping the divide and conquer process is when we have1element left.
+ The base case for stopping the divide and conquer process is when we have 1 element left.
  Merge back the divided arrays while sorting the elements. O(n) runtime.
  */
 

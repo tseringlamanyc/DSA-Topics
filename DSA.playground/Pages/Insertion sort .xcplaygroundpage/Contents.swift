@@ -34,11 +34,11 @@ insertionSort(arr: &list)
 func insertionSortPrime(arr: inout [Int]) {
     
     for current in 1..<arr.count {
-        var hole = current
+        var mark = current
         
-        while hole > 0 && arr[hole] < arr[hole - 1] {
-            arr.swapAt(hole, hole - 1)
-            hole -= 1
+        while mark > 0 && arr[mark] < arr[mark - 1] {
+            arr.swapAt(mark, mark - 1)
+            mark -= 1
         }
     }
     

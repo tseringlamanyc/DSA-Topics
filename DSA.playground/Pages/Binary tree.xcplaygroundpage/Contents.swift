@@ -1,5 +1,7 @@
 import UIKit
 
+Double(2/5)
+
 /*
  BINARY TREE
  - Root node
@@ -52,6 +54,7 @@ struct Queue<T> {
 }
 
 extension BinaryTreeNode {
+    
     func breadthTraversal(visit: (BinaryTreeNode) -> ()) {
         
         var queue = Queue<BinaryTreeNode>()
@@ -76,24 +79,30 @@ extension BinaryTreeNode {
     
     /*
      func breadthFirstTraversal<T>(_ treeNode: BinaryTreeNode<T>?) {
-       var queue = Queue<BinaryTreeNode<T>>()
-       guard let treeNode = treeNode else {
-         return
-       }
-       queue.enqueue(treeNode)
-       print(treeNode.value)
-       while let node = queue.dequeue() {
-         if let left = node.left {
-           print(left.value)
-           queue.enqueue(left)
-         }
-         if let right = node.right {
-           print(right.value)
-           queue.enqueue(right)
-         }
-       }
+     
+     var queue = Queue<BinaryTreeNode<T>>()
+     
+     guard let treeNode = treeNode else {
+     return
+     }
+     
+     queue.enqueue(treeNode)
+     print(treeNode.value)
+     
+     while let node = queue.dequeue() {
+     if let left = node.left {
+     print(left.value)
+     queue.enqueue(left)
+     }
+     
+     if let right = node.right {
+     print(right.value)
+     queue.enqueue(right)
+     }
+     }
      }
      */
+    
 }
 
 let rootNode1 = BinaryTreeNode<Int>(1)
@@ -122,11 +131,14 @@ print()
 // =======================
 //   Depth Traversals
 // =======================
+
 /*
  3 ways to traverse
+ 
  - in order
  - pre order
  - post order
+ 
  */
 
 extension BinaryTreeNode {
@@ -151,6 +163,7 @@ extension BinaryTreeNode {
         visit(self)
     }
 }
+
 print()
 
 print("In order")
@@ -159,7 +172,6 @@ rootNode1.inorderTraversal { (node) in
 }
 
 print()
-
 
 print("Pre order")
 rootNode1.preorderTraversal { (node) in
@@ -173,26 +185,27 @@ rootNode1.postOrder { (node) in
     print(node.value, terminator: " ")
 }
 
-
 func diameter<T>(_ root: BinaryTreeNode<T>?) -> Int {
-  guard let root = root else { return 0 }
-  
-  let leftHeight = getHeight(root.lChild)
-  let rightHeight = getHeight(root.rChild)
-  
-  let leftDiameter = diameter(root.lChild)
-  let rightDiameter = diameter(root.rChild)
+    guard let root = root else { return 0 }
     
-  return max(1 + leftHeight + rightHeight, max(leftDiameter, rightDiameter))
+    let leftHeight = getHeight(root.lChild)
+    let rightHeight = getHeight(root.rChild)
+    
+    let leftDiameter = diameter(root.lChild)
+    let rightDiameter = diameter(root.rChild)
+    
+    return max(1 + leftHeight + rightHeight, max(leftDiameter, rightDiameter))
 }
 
 func getHeight<T>(_ root: BinaryTreeNode<T>?) -> Int {
     guard let root = root else {return 0}
+//
+//    let leftSide = getHeight(root.lChild)
+//    let rightSide = getHeight(root.rChild)
+//
+//    return 1 + max(leftSide, rightSide)
     
-    let leftSide = getHeight(root.lChild)
-    let rightSide = getHeight(root.rChild)
-
-    return 1 + max(leftSide, rightSide)
+    return 1 + max(getHeight(root.lChild), getHeight(root.rChild))
 }
 
 getHeight(rootNode1)
@@ -225,5 +238,3 @@ twentyThreeNode.rChild = tenNode
 tenNode.lChild = threeNode
 
 getHeight(grassRoot)
-
-

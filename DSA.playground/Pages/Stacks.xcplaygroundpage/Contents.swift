@@ -192,3 +192,22 @@ print(array1)
 
 var num = 9
 var numString = String(num)
+
+
+struct Stack2 {
+    var arr = [Int]()
+    
+    var peek: Int? {
+        return arr.last
+    }
+    
+    mutating func push(_ value: Int) {
+        arr.append(value)
+    }
+    
+    mutating func pop() -> Int {
+        return arr.removeLast()
+    }
+}
+
+var arr = [1,2,3]
