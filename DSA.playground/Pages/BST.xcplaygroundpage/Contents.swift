@@ -34,7 +34,7 @@ func binarySearch<T: Comparable>(arr: [T], searchKey: T, range: Range<Int>) -> I
         
         // middleIndex < key, look at the right side
     else if arr[middleIndex] < searchKey {
-        return binarySearch(arr: arr, searchKey: searchKey, range: middleIndex + 1..<range.upperBound) // not including middleIndex
+        return binarySearch(arr: arr, searchKey: searchKey, range: middleIndex + 1..<range.upperBound) //  not including middleIndex
     }
     
     // no value found
@@ -159,10 +159,12 @@ func search(_ nums: [Int], _ target: Int) -> Int {
         
     else if nums[middleIndex] < target {
         lowerBound = middleIndex + 1
+        return search(Array(nums[lowerBound...upperBound]), target)
     }
         
     else if nums[middleIndex] > target {
         upperBound = middleIndex - 1
+        return search(Array(nums[lowerBound..<upperBound]), target)
     }
     
     return 0

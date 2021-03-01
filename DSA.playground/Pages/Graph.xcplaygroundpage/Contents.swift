@@ -42,7 +42,7 @@ struct Graph {
 }
 
 /*
-
+ 
  0---------1
  |       / |  \
  |    /    |    \
@@ -50,14 +50,14 @@ struct Graph {
  |/        |  /
  4---------3/
  
-   0 1 2 3 4
-0: 0 1 0 0 1
-1: 1 0 1 1 1
-2: 0 1 0 1 0
-3: 0 1 1 0 1
-4: 1 1 0 1 0
+ 0 1 2 3 4
+ 0: 0 1 0 0 1
+ 1: 1 0 1 1 1
+ 2: 0 1 0 1 0
+ 3: 0 1 1 0 1
+ 4: 1 1 0 1 0
  
-*/
+ */
 
 var graph = Graph(vertices: 5)
 graph.addEdge(source: 0, destination: 1)
@@ -73,10 +73,12 @@ graph.printGraph()
 struct Edge {
     var source: Int
     var destination: Int
+    var weight: Int? = nil
 }
 
 struct Node {
     var value: Int // weight
+    var weight: Int? = nil
 }
 
 struct Graph2 {
@@ -104,28 +106,121 @@ struct Graph2 {
     }
 }
 
-let edges = [
-  Edge(source: 0, destination: 1),
-  Edge(source: 0, destination: 4),
-  
-  Edge(source: 1, destination: 0),
-  Edge(source: 1, destination: 2),
-  Edge(source: 1, destination: 4),
-  Edge(source: 1, destination: 3),
-  
-  Edge(source: 2, destination: 1),
-  Edge(source: 2, destination: 3),
-  
-  Edge(source: 3, destination: 1),
-  Edge(source: 3, destination: 2),
-  Edge(source: 3, destination: 4),
+//let edges = [
+//  Edge(source: 0, destination: 1),
+//  Edge(source: 0, destination: 4),
+//
+//  Edge(source: 1, destination: 0),
+//  Edge(source: 1, destination: 2),
+//  Edge(source: 1, destination: 4),
+//  Edge(source: 1, destination: 3),
+//
+//  Edge(source: 2, destination: 1),
+//  Edge(source: 2, destination: 3),
+//
+//  Edge(source: 3, destination: 1),
+//  Edge(source: 3, destination: 2),
+//  Edge(source: 3, destination: 4),
+//
+//  Edge(source: 4, destination: 0),
+//  Edge(source: 4, destination: 1),
+//  Edge(source: 4, destination: 3),
+//]
+//
+//var graph2 = Graph2(edges: edges)
+//
+//graph2.printGraph()
 
-  Edge(source: 4, destination: 0),
-  Edge(source: 4, destination: 1),
-  Edge(source: 4, destination: 3),
+extension Graph2 {
+    
+    func dfs(source: Int) {
+        var visited: Set<Int> = []
+        var stack = [Int]()
+        
+        stack.append(source)
+        visited.insert(source)
+        
+        while !stack.isEmpty {
+            let source = stack.removeLast()
+            print("\(source)", terminator: " ")
+            
+            for neighborNode in adjList[source] {
+                
+                if !visited.contains(neighborNode.value) {
+                    visited.insert(neighborNode.value)
+                    stack.append(neighborNode.value)
+                }
+                
+            }
+        }
+    }
+}
+
+
+let edges = [
+    Edge(source: 0, destination: 1),
+    Edge(source: 0, destination: 3),
+    
+    Edge(source: 1, destination: 0),
+    Edge(source: 1, destination: 2),
+    
+    Edge(source: 2, destination: 1),
+    Edge(source: 2, destination: 3),
+    
+    Edge(source: 3, destination: 0),
+    Edge(source: 3, destination: 2),
 ]
 
 var graph2 = Graph2(edges: edges)
 
-graph2.printGraph()
+graph2.dfs(source: 0)
 
+print()
+
+let matrix = [
+  [1, 2, 3, 4,],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+  [13, 14, 15, 16]
+]
+// 1 5 9 13 14 10 6 2 3 7 11 15 16 12 8 4
+
+func dfs(_ grid: [[Int]]) {
+    
+    // in dfs always keep track (eg visited set)
+    var grid = grid
+    
+    // keep track by (bool, or arbitarary value)
+    for row in 0..<grid.count {
+        for col in 0..<grid[row].count {
+           helperdfs(&grid, row, col)
+        }
+    }
+}
+
+func helperdfs(_ grid: inout [[Int]], _ row: Int, _ col: Int) {
+    // set boundaries
+    /*
+     have we seen the cell before
+     is the row within the limits of the array
+     is the col within the limits of the array
+     */
+    
+    let height = grid.count // number of rows
+    let length = grid[0].count // number of elements in a row
+    
+    if row < 0 || col < 0 || row >= height || col >= length || grid[row][col] == 0 {return}
+    
+    print("\(grid[row][col])", terminator: " ")
+    
+    // mark the cell as seen
+    grid[row][col] = 0
+    
+    // perform dfs on each direction in the grid recursively
+    helperdfs(&grid, row + 1, col)
+    helperdfs(&grid, row - 1, col)
+    helperdfs(&grid, row, col + 1)
+    helperdfs(&grid, row, col - 1)
+}
+
+dfs(matrix)
